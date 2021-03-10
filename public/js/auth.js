@@ -1,9 +1,9 @@
-var endPoint = "/api/auth/";
-var dev = "http://localhost:3000"
-var production = "https://japc-testing-node-rest-server.herokuapp.com"
+const endPoint = "/api/auth/";
+const dev = "http://localhost:3000"
+const production = "https://japc-testing-node-rest-server.herokuapp.com"
 
 // console.log(windows.location.hostname.includes('localhost'));
-var url = (window.location.hostname.includes('localhost'))
+const url = (window.location.hostname.includes('localhost'))
     ? dev + endPoint
     : production + endPoint;
 // console.log("url:" + url);
@@ -36,7 +36,7 @@ loginForm.addEventListener('submit', event => {
         localStorage.setItem('token', token);
     })
     .catch(err => {
-        log(err)
+        console.error(err)
     })
 
 
@@ -46,8 +46,8 @@ loginForm.addEventListener('submit', event => {
 
 function onSignIn(googleUser) {
 
-    // var profile = googleUser.getBasicProfile();
-    var id_token = googleUser.getAuthResponse().id_token;
+    // const profile = googleUser.getBasicProfile();
+    const id_token = googleUser.getAuthResponse().id_token;
     // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     // console.log('Name: ' + profile.getName());
     // console.log('Image URL: ' + profile.getImageUrl());
@@ -72,7 +72,7 @@ function onSignIn(googleUser) {
 }
 
 function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
+    const auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
     console.log('User signed out.');
     });
