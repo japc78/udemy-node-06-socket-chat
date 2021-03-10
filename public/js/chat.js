@@ -10,11 +10,11 @@ let user, socket;
 
 
 // Html
-const txtUid = document.querySelector('#ulMessage');
-const txtMessage = document.querySelector('#ulMessage');
+const txtUid = document.querySelector('#txtUid');
+const txtMessage = document.querySelector('#txtMessage');
 const ulUsers = document.querySelector('#ulUsers');
 const ulMessage = document.querySelector('#ulMessage');
-const btnLogout = document.querySelector('#ulMessage');
+const btnLogout = document.querySelector('#btnLogout');
 
 
 // Validar el token del localStorage
@@ -55,8 +55,8 @@ const connectSocket = async () => {
         console.log('Socket offline');
     });
 
-    socket.on('get-messages', () => {
-
+    socket.on('get-messages', (payload) => {
+        console.log(payload);
     });
 
     socket.on('active-users', (payload) => {
@@ -87,6 +87,22 @@ const showUserOnWeb = (users = []) => {
     ulUsers.innerHTML = usersHtml;
 
 }
+
+txtMessage.addEventListener('keyup', ({ keyCode}) => {
+    const message = txtMessage.value;
+    const uid = txtUid.value;
+    // console.log(message);
+    // console.log(keyCode);
+
+    if (message.length === 0) { return;}
+    // Si no presiona enter
+    if (keyCode != 13) { return;}
+
+    socket.emit('send-message', { message, uid });
+
+    txtMessage.value = '';
+
+})
 
 main();
 

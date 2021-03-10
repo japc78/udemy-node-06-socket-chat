@@ -2,11 +2,11 @@ const Message = require("./chat-message");
 
 class ChatMessages {
     constructor() {
-        this.messages = [],
+        this.messages = [];
         this.users = {}
     }
 
-    get last10Messages() {
+    get last10() {
         this.messages = this.messages.splice(0,10);
         return this.messages;
     }
@@ -16,7 +16,7 @@ class ChatMessages {
     }
 
     sendMessage( uid, userName, message) {
-        this.messages = new Message(uid, userName, message);
+        this.messages.unshift( new Message(uid, userName, message) );
     }
 
     connectUser( user) {

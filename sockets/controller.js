@@ -23,6 +23,11 @@ const socketController = async (socket = new Socket(), io ) => {
         io.emit('active-users',  chatMessages.usersArray );
     });
 
+    socket.on('send-message', ({ message, uid }) => {
+        chatMessages.sendMessage(user.uid, user.name, message);
+        io.emit('get-messages', chatMessages.last10);
+    });
+
 
 
 }
