@@ -34,6 +34,7 @@ loginForm.addEventListener('submit', event => {
         if (msg) return console.error(msg);
 
         localStorage.setItem('token', token);
+        window.location = 'chat.html';
     })
     .catch(err => {
         console.error(err)
