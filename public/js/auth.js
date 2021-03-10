@@ -67,6 +67,7 @@ function onSignIn(googleUser) {
     .then( ({ token }) => {
         // console.log(token);
         localStorage.setItem('token', token);
+        window.location = 'chat.html';
     })
 
     .catch(err => console.error(err));

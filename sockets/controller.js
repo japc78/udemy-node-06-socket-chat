@@ -17,6 +17,9 @@ const socketController = async (socket = new Socket(), io ) => {
     chatMessages.connectUser(user);
     io.emit('active-users',  chatMessages.usersArray );
 
+    // Al recargar o conectarse un cliente se envían los últimos mensajes.
+    socket.emit('get-messages', chatMessages.last10);
+
     // Limpiar cuando un usuario de desconecta
     socket.on('disconnect', () => {
         chatMessages.disconnectUser(user.uid);

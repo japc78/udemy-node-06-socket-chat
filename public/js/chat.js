@@ -13,7 +13,7 @@ let user, socket;
 const txtUid = document.querySelector('#txtUid');
 const txtMessage = document.querySelector('#txtMessage');
 const ulUsers = document.querySelector('#ulUsers');
-const ulMessage = document.querySelector('#ulMessage');
+const ulMessages = document.querySelector('#ulMessages');
 const btnLogout = document.querySelector('#btnLogout');
 
 
@@ -55,9 +55,11 @@ const connectSocket = async () => {
         console.log('Socket offline');
     });
 
-    socket.on('get-messages', (payload) => {
-        console.log(payload);
-    });
+    // socket.on('get-messages', (payload) => {
+    //     showMessages(payload);
+    // });
+    // de forma abreviada
+    socket.on('get-messages', showMessages);
 
     socket.on('active-users', (payload) => {
         showUserOnWeb(payload);
@@ -85,7 +87,21 @@ const showUserOnWeb = (users = []) => {
     });
 
     ulUsers.innerHTML = usersHtml;
+}
 
+const showMessages = (messages = []) => {
+    let messagesHtml = '';
+    messages.forEach(({ userName, message }) => {
+        messagesHtml += `
+            <li>
+                <p>
+                    <span class="text-primary">${ userName }</span>:
+                    <span>${message}</span>
+                </p>
+            </li>`
+    });
+
+    ulMessages.innerHTML = messagesHtml;
 }
 
 txtMessage.addEventListener('keyup', ({ keyCode}) => {
