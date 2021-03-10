@@ -12,7 +12,7 @@ let user, socket;
 // Html
 const txtUid = document.querySelector('#ulMessage');
 const txtMessage = document.querySelector('#ulMessage');
-const ulUsers = document.querySelector('#ulMessage');
+const ulUsers = document.querySelector('#ulUsers');
 const ulMessage = document.querySelector('#ulMessage');
 const btnLogout = document.querySelector('#ulMessage');
 
@@ -60,7 +60,7 @@ const connectSocket = async () => {
     });
 
     socket.on('active-users', (payload) => {
-        console.log(payload);
+        showUserOnWeb(payload);
     });
 
     socket.on('get-private-message', () => {
@@ -70,6 +70,22 @@ const connectSocket = async () => {
 
 const main = async () => {
     await validateJWT();
+}
+
+const showUserOnWeb = (users = []) => {
+    let usersHtml = '';
+    users.forEach(({ name, uid }) => {
+        usersHtml += `
+            <li>
+                <p>
+                    <h5 class="text-success">${ name }</h5>
+                    <span class="fs-6 text-muted">${uid}</span>
+                </p>
+            </li>`
+    });
+
+    ulUsers.innerHTML = usersHtml;
+
 }
 
 main();
