@@ -15,6 +15,29 @@
                 <hr>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Send message</h3>
+                <hr>
+                <input type="text" name="" id="txtUid" class="form-control mb-2" placeholder="uid" autocomplete="off">
+                <input type="text" name="" id="txtMessage" class="form-control mb-2" placeholder="message" autocomplete="off">
+            </div>
+            <div class="col-sm-6">
+                <h3>Chat</h3>
+                <ul id="ulMessage">
+
+                </ul>
+
+
+            </div>
+        </div>
+
+        <h3>Users</h3>
+        <ul id="ulUsers">
+
+        </ul>
+        <button type="button" name="btnLogout" id="btnLogout" class="btn btn-primary" btn-lg btn-block">logout</button>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

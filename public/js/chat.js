@@ -8,6 +8,15 @@ const url = (window.location.hostname.includes('localhost'))
 
 let user, socket;
 
+
+// Html
+const txtUid = document.querySelector('#ulMessage');
+const txtMessage = document.querySelector('#ulMessage');
+const ulUsers = document.querySelector('#ulMessage');
+const ulMessage = document.querySelector('#ulMessage');
+const btnLogout = document.querySelector('#ulMessage');
+
+
 // Validar el token del localStorage
 const validateJWT = async() => {
     const token = localStorage.getItem('token') || '';
@@ -32,10 +41,30 @@ const validateJWT = async() => {
 }
 
 const connectSocket = async () => {
-    const socket = io({
+    socket = io({
         'extraHeaders': {
             'x-token': localStorage.getItem('token'),
         }
+    });
+
+    socket.on('connect', ()=> {
+        console.log('Socket online');
+    });
+
+    socket.on('disconnect', ()=> {
+        console.log('Socket offline');
+    });
+
+    socket.on('get-messages', () => {
+
+    });
+
+    socket.on('active-users', () => {
+
+    });
+
+    socket.on('get-private-message', () => {
+
     });
 }
 
